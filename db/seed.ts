@@ -618,9 +618,15 @@ for (const [userName, communityNames] of Object.entries(
     const createdGoals: LearningGoalWithCommunity[] = [];
     for (const [communityName, goals] of Object.entries(learningGoalsData)) {
       const community = createdCommunities.find(
-        (c) => c.name === communityName
-      );
-      for (const goal of goals) {
+  (c) => c.name === communityName
+);
+
+if (!community) {
+  console.warn(`Skipping community ${communityName}`);
+  continue;
+}
+
+for (const goal of goals) {
         const [created] = await db
           .insert(learningGoals)
           .values({
@@ -647,6 +653,10 @@ for (const [userName, communityNames] of Object.entries(
           g.title === assignment.goal &&
           g.communityName === assignment.community
       );
+      if (!user || !community || !templateGoal) {
+  console.warn(`Skipping ${userName}`);
+  continue;
+}
 
       await db.insert(learningGoals).values({
         userId: user.id,
@@ -664,19 +674,25 @@ for (const [userName, communityNames] of Object.entries(
       proUserGoalAssignments
     )) {
       const user = allUsers.find((u) => u.name === userName);
+      if (!user) {
+  continue;
+}
       let totalGoals = 0;
 
       for (const [communityName, goalTitles] of Object.entries(communities)) {
         const community = createdCommunities.find(
           (c) => c.name === communityName
         );
+        if (!community) {
+  continue;
+}
 
         for (const goalTitle of goalTitles) {
           const templateGoal = createdGoals.find(
             (g) => g.title === goalTitle && g.communityName === communityName
           );
 
-          if (templateGoal) {
+          if (templateGoal ) {
             await db.insert(learningGoals).values({
               userId: user.id,
               communityId: community.id,
