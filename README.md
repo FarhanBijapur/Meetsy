@@ -72,8 +72,9 @@ CLERK_WEBHOOK_SECRET=whsec_...
 NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
 NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
 
-# OpenAI for AI Features
-OPENAI_API_KEY=sk-...
+# For AI Features
+GOOGLE_GENERATIVE_AI_MODEL=gemini-flash-latest
+GOOGLE_GENERATIVE_AI_API_KEY=
 ```
 
 ## 🗄️ Database Setup
