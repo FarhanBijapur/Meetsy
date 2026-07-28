@@ -1,5 +1,8 @@
 # Meetsy - A community learning platform where learners find compatible study partners and achieve their goals together!
 
+## 🌐 Live Demo
+**Live Application:** https://meetsy-cyan.vercel.app
+
 Get complete access to Meetsy, an AI-powered learning platform that connects you with the perfect learning partners based on your goals, interests, and learning style in one intelligent matching system.
 
 ## ⚡ Features
@@ -31,7 +34,7 @@ Get complete access to Meetsy, an AI-powered learning platform that connects you
 - 🔔 Real-time toast notifications for updates and actions
 - 🌓 Dark/light theme support
 - ✨ Smooth animations with Motion (Framer Motion)
-- 🚀 Production-ready deployment
+- 🚀 Production-ready deployment on Vercel
 - 📈 Performance optimizations with batch queries and caching
 - 🔍 Intelligent duplicate prevention and match optimization
 - 🏷️ Tag-based goal categorization and filtering
