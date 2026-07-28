@@ -565,37 +565,53 @@ async function comprehensiveSeed() {
     }
 
     // 4. Add FREE users to communities (1 community each)
-    console.log("\n🔗 Adding FREE USERS to communities (1 each)...");
-    for (const [userName, assignment] of Object.entries(freeUserAssignments)) {
-      const user = allUsers.find((u) => u.name === userName);
-      const community = createdCommunities.find(
-        (c) => c.name === assignment.community
-      );
+console.log("\n🔗 Adding FREE USERS to communities (1 each)...");
+for (const [userName, assignment] of Object.entries(freeUserAssignments)) {
+  const user = allUsers.find((u) => u.name === userName);
+  const community = createdCommunities.find(
+    (c) => c.name === assignment.community
+  );
 
-      await db.insert(communityMembers).values({
-        userId: user.id,
-        communityId: community.id,
-      });
-      console.log(`   ✓ ${userName} → ${assignment.community}`);
-    }
+  if (!user || !community) {
+    console.warn(`Skipping ${userName}`);
+    continue;
+  }
 
-    // 5. Add PRO users to communities (multiple each)
-    console.log("\n🔗 Adding PRO USERS to communities (multiple each)...");
-    for (const [userName, communityNames] of Object.entries(
-      proUserCommunityAssignments
-    )) {
-      const user = allUsers.find((u) => u.name === userName);
-      for (const communityName of communityNames) {
-        const community = createdCommunities.find(
-          (c) => c.name === communityName
-        );
-        await db.insert(communityMembers).values({
-          userId: user.id,
-          communityId: community.id,
-        });
-      }
-      console.log(`   ✓ ${userName} → ${communityNames.length} communities`);
-    }
+  await db.insert(communityMembers).values({
+    userId: user.id,
+    communityId: community.id,
+  });
+
+  console.log(`   ✓ ${userName} → ${assignment.community}`);
+}
+
+  // 5. Add PRO users to communities (multiple each)
+console.log("\n🔗 Adding PRO USERS to communities (multiple each)...");
+for (const [userName, communityNames] of Object.entries(
+  proUserCommunityAssignments
+)) {
+  const user = allUsers.find((u) => u.name === userName);
+
+  if (!user) {
+    console.warn(`Skipping ${userName}`);
+    continue;
+  }
+
+  for (const communityName of communityNames) {
+    const community = createdCommunities.find(
+      (c) => c.name === communityName
+    );
+
+    if (!community) continue;
+
+    await db.insert(communityMembers).values({
+      userId: user.id,
+      communityId: community.id,
+    });
+  }
+
+  console.log(`   ✓ ${userName} → ${communityNames.length} communities`);
+}
 
     // 6. Create template learning goals for each community
     console.log("\n📚 Creating template learning goals...");
