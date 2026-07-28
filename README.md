@@ -15,7 +15,7 @@ Get complete access to Meetsy, an AI-powered learning platform that connects you
 - 📜 TypeScript for static typing and enhanced development experience
 - 💅 TailwindCSS 4 for utility-first, responsive styling
 - ✅ Zod for schema validation and form handling
-- 🤖 OpenAI GPT-4o-mini for AI-powered matching and conversation summaries
+- 🤖 Google Gemini-flash-latest for AI-powered matching and conversation summaries
 - ⚡ Hono for lightweight, fast API endpoints
 - 🔄 TanStack React Query for efficient server state management
 
@@ -45,7 +45,7 @@ To get started with this project:
 3. Create the required credentials:
    - Clerk authentication keys
    - PostgreSQL database connection string
-   - OpenAI API key
+   - Gemini API key
 
 ## 🔨 How to Fork and Clone
 
@@ -144,7 +144,7 @@ The application follows a modern full-stack architecture:
 2. **API Layer**: Hono framework ([app/api/[[...route]]/route.ts](app/api/[[...route]]/route.ts)) for lightweight, fast API
 3. **Database**: PostgreSQL with Drizzle ORM ([db/schema.ts](db/schema.ts)) for type-safe queries
 4. **Authentication**: Clerk handles all auth, session management, and user synchronization
-5. **AI Services**: Vercel AI SDK with OpenAI GPT-4o-mini for matching and summaries
+5. **AI Services**: Vercel AI SDK with Google gemini-flash-latest for matching and summaries
 6. **State Management**: React Query for server state, React hooks for local state
 
 ### API Routes Structure
@@ -160,7 +160,7 @@ All routes use Clerk authentication middleware and Hono error handling.
 
 ### Semantic Matching
 
-The AI matching system uses GPT-4o-mini to analyze learning goals and find compatible partners:
+The AI matching system uses gemini-flash-latest to analyze learning goals and find compatible partners:
 
 - Understands goals beyond keyword matching (e.g., "React basics" matches with "React Hooks deep dive")
 - Evaluates topic similarity, complementary skills, and learning styles
@@ -186,7 +186,14 @@ Located in: [lib/ai.ts](lib/ai.ts)
 - 1 learning goal
 - 3 active matches
 - Unlimited conversations and messages
+ 
+### Basic Tier
 
+- 50 communities
+- 50 learning goals
+- 50 active matches
+- 50 conversations and messages
+- Priority AI matching
 ### Pro Tier
 
 - Unlimited communities
@@ -195,18 +202,6 @@ Located in: [lib/ai.ts](lib/ai.ts)
 - Unlimited conversations and messages
 - Priority AI matching
 
-## 🙏 Acknowledgements
-
-- [Clerk](https://go.clerk.com/X2swX9H) for authentication and for kindly sponsoring this build
-
-- [PostgreSQL](https://www.postgresql.org?ref=kulkarniankita) for the database
-- [Drizzle ORM](https://orm.drizzle.team?ref=kulkarniankita) for type-safe database operations
-- [OpenAI](https://openai.com?ref=kulkarniankita) for AI-powered features
-- [Zod](https://zod.dev/?ref=kulkarniankita) for TypeScript runtime validations
-- [ShadcN UI](https://ui.shadcn.com/?ref=kulkarniankita) for components
-- [Next.js](https://nextjs.org?ref=kulkarniankita) for the amazing framework
-- [Hono](https://hono.dev?ref=kulkarniankita) for the lightweight API framework
-- [TanStack Query](https://tanstack.com/query?ref=kulkarniankita) for data fetching
 
 ## 🛠️ Troubleshooting
 
@@ -224,7 +219,7 @@ Located in: [lib/ai.ts](lib/ai.ts)
 
 ### AI Features Not Working
 
-- Verify OPENAI_API_KEY is valid and has credits
+- Verify GEMINI_API_KEY is valid and has credits
 - Check API rate limits if getting 429 errors
 - Review console logs for detailed error messages
 
